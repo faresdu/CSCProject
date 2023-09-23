@@ -25,7 +25,7 @@ public class Phonebook {
             return;
         }
 
-        if (eventList.hasConflict(contact, dateAndTime)) {
+        if (eventList.conflictDate(contact, dateAndTime)) {
             System.out.println("There's a scheduling conflict for this contact.");
             return;
         }
@@ -35,7 +35,7 @@ public class Phonebook {
     }
 
     public void printAllEventsOrdered() {
-        Event[] events = eventList.getAllEventsOrdered();
+        Event[] events = eventList.orderEvents();
         for (Event event : events) {
             System.out.println("Event Title: " + event.getEventTitle());
             System.out.println("Date and Time: " + event.getDateAndTime());
@@ -44,4 +44,16 @@ public class Phonebook {
             System.out.println();
         }
     }
+    // public void sharedEventAndName(String eventName){
+    //     EventNode event = eventList.findEvent(eventName);
+       
+    //     if(eventList == null){
+    //         return;
+    //     }
+    //     else{
+    //         while( != null){
+                
+    //         }
+    //     }
+    // }
 }

@@ -1,15 +1,6 @@
 public class EventList {
     private EventNode head;
-
-    private class EventNode {
-        private Event event;
-        private EventNode next;
-
-        public EventNode(Event event) {
-            this.event = event;
-            this.next = null;
-        }
-    }
+    private EventNode current;
 
     public void addEvent(Event event) {
         EventNode newNode = new EventNode(event);
@@ -17,7 +8,7 @@ public class EventList {
         if (head == null) {
             head = newNode;
         } else {
-            EventNode current = head;
+            current = head;
             while (current.next != null) {
                 current = current.next;
             }
@@ -25,11 +16,11 @@ public class EventList {
         }
     }
 
-    public boolean hasConflict(Contact contact, String newDateAndTime) {
-        EventNode current = head;
+    public boolean conflictDate(Contact contact, String DateAndTime) {
+        current = head;
         while (current != null) {
             Event event = current.event;
-            if (event.getContact().equals(contact) && event.getDateAndTime().equalsIgnoreCase(newDateAndTime)) {
+            if (event.getContact().equals(contact) && event.getDateAndTime().equalsIgnoreCase(DateAndTime)) {
                 return true;
             }
             current = current.next;
@@ -37,9 +28,9 @@ public class EventList {
         return false;
     }
 
-    public Event[] getAllEventsOrdered() {
+    public Event[] orderEvents() {
         int count = 0;
-        EventNode current = head;
+        current = head;
         while (current != null) {
             count++;
             current = current.next;
@@ -55,6 +46,16 @@ public class EventList {
         sortEvents(events);
 
         return events;
+    }
+    public EventNode findEvent(String eventName){
+        current = head;
+        while(current != null){
+            if(current.getEvent().getEventTitle().equalsIgnoreCase(eventName)){
+                return current;
+            }
+            current = current.getNext();
+        }
+        return null;
     }
 
     private void sortEvents(Event[] events) {

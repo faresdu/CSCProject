@@ -1,48 +1,74 @@
 public class LinkedList {
-    private Node head;
-
-    private class Node {
-        private Contact contact;
-        private Node next;
-
-        public Node(Contact contact) {
-            this.contact = contact;
-            this.next = null;
-        }
-    }
+    private ContactNode head;
+    private ContactNode current;
 
     public void addContact(Contact contact) {
-        Node newNode = new Node(contact);
+        ContactNode<Contact> contactN = new ContactNode<Contact>(contact);
 
         if (head == null) {
-            head = newNode;
+            head = contactN;
+        } else if (head.getContact().compareTo(contact) <= 0 && head.getContact().getPhoneNumber() != contact.getPhoneNumber()) {
+            contactN.setNext(head);
+            head = contactN;
         } else {
-            Node current = head;
-            while (current.next != null) {
-                current = current.next;
+            while (current.getNext() != null && current.getNext().getContact().compareTo(contact) < 0 && current.getContact().getPhoneNumber() != contact.getPhoneNumber() ) {
+                current = current.getNext();
             }
-            current.next = newNode;
+            current.setNext(current.getNext());
+            current.setNext(contactN);
         }
     }
 
+
+
     public boolean existsContact(Contact contact) {
-        Node current = head;
+        current = head;
         while (current != null) {
             if (current.contact.equals(contact)) {
                 return true;
             }
-            current = current.next;
+            current = current.getNext();
         }
         return false;
     }
 
     public Contact findContactByName(String name) {
-        Node current = head;
+        current = head;
         while (current != null) {
             if (current.contact.getName().equalsIgnoreCase(name)) {
                 return current.contact;
             }
-            current = current.next;
+            current = current.getNext();
+        }
+        return null;
+    }
+    public Contact findContactByEmail(String email) {
+        current = head;
+        while (current != null) {
+            if (current.contact.getEmailAddress().equalsIgnoreCase(email)) {
+                return current.contact;
+            }
+            current = current.getNext();
+        }
+        return null;
+    }
+    public Contact findContactByAddress(String address) {
+        current = head;
+        while (current != null) {
+            if (current.contact.getAddress().equalsIgnoreCase(address)) {
+                return current.contact;
+            }
+            current = current.getNext();
+        }
+        return null;
+    }
+    public Contact findContactByBirthday(String birthday) {
+        current = head;
+        while (current != null) {
+            if (current.contact.getBirthday().equalsIgnoreCase(birthday)) {
+                return current.contact;
+            }
+            current = current.getNext();
         }
         return null;
     }
@@ -53,19 +79,19 @@ public class LinkedList {
         }
 
         if (head.contact.getName().equalsIgnoreCase(name)) {
-            head = head.next;
+            head = head.getNext();
             return true;
         }
 
-        Node prev = head;
-        Node current = head.next;
+        ContactNode previous = head;
+        current = head.getNext();
         while (current != null) {
             if (current.contact.getName().equalsIgnoreCase(name)) {
-                prev.next = current.next;
+                previous.next = current.getNext();
                 return true;
             }
-            prev = current;
-            current = current.next;
+            previous = current;
+            current = current.getNext();
         }
 
         return false;

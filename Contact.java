@@ -4,19 +4,23 @@ public class Contact implements Comparable<Contact> {
     private String emailAddress;
     private String address;
     private String birthday;
+    private String notes;
 
-    public Contact(String name, String phoneNumber, String emailAddress, String address, String birthday) {
+    public Contact(String name, String phoneNumber, String emailAddress, String address, String birthday,
+            String notes) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
         this.address = address;
         this.birthday = birthday;
+        this.notes = notes;
     }
 
     @Override
     public int compareTo(Contact other) {
         return this.name.compareToIgnoreCase(other.getName());
     }
+
     public String getName() {
         return name;
     }
@@ -57,5 +61,12 @@ public class Contact implements Comparable<Contact> {
         this.birthday = birthday;
     }
 
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
 }
