@@ -15,23 +15,43 @@ public class Phonebook {
         return contactList.deleteContact(name);
     }
 
-    public Contact findContactByName(String name) {
-        return contactList.findContactByName(name);
+    public void findContactByName(String name) {
+        contactList.findContactByName(name);
+    }
+    public void findContactByEmail(String email) {
+        contactList.findContactByEmail(email);
+    }
+    public void findContactByPhone(String phone) {
+        contactList.findContactByPhone(phone);
+    }
+    public void findContactByAddress(String address) {
+        contactList.findContactByAddress(address);
+    }
+    public boolean existsContact(Contact contact) {
+        if(contactList.existsContact(contact)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public void findEvent(String eventName){
+        eventList.findEvent(eventName);
     }
 
-    public void scheduleEvent(Contact contact, String eventTitle, String dateAndTime, String location) {
-        if (!contactList.existsContact(contact)) {
+    public void scheduleEvent(Event event) {
+        if (!contactList.existsContact(event.getContact())) {
             System.out.println("Contact does not exist in the phonebook.");
             return;
         }
 
-        if (eventList.conflictDate(contact, dateAndTime)) {
+        if (eventList.conflictDate(event.getContact(), event.getDateAndTime())) {
             System.out.println("There's a scheduling conflict for this contact.");
             return;
         }
 
-        Event event = new Event(eventTitle, dateAndTime, location, contact);
-        eventList.addEvent(event);
+        Event newEvent = new Event(event.getEventTitle(), event.getDateAndTime(), event.getLocation(),event.getContact());
+        eventList.addEvent(newEvent);
     }
 
     public void printAllEventsOrdered() {

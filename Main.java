@@ -25,7 +25,7 @@ public class Main {
                     searchContact();
                     break;
                 case 5:
-                    printEventDetails();
+                    printEvent();
                     break;
                 case 6:
                     printContactByFN();
@@ -44,7 +44,7 @@ public class Main {
     }
 
     private static void displayMenu() {
-        System.out.println("Welcome to the AFA Phonebook!");
+        System.out.println("Welcome to AFA Phonebook!");
         System.out.println("---------------------");
         System.out.println("1. Add a Contact");
         System.out.println("2. Schedule an Event");
@@ -88,31 +88,96 @@ public class Main {
     }
 
     private static void addEvent() {
-        System.out.print("Enter the event title: ");
-        String eventTitle = scanner.nextLine();
+        System.out.println("Enter the event title: ");
+        String eventTitle = scanner.next();
 
-        System.out.print("Enter the event date and time(MM/DD/YYY HH:MM): ");
-        String dateAndTime = scanner.nextLine();
+        System.out.println("Enter the event date and time(MM/DD/YYYY HH:MM): ");
+        String dateAndTime = scanner.next();
 
         System.out.println("Enter the event location: ");
-        String location = scanner.nextLine();
+        String location = scanner.next();
 
         System.out.println("Enter the contact name: ");
-        Con
+        String contact = scanner.next();
+        Contact c = new Contact();
+        c.setName(contact);
+        if (!phoneBook.existsContact(c)) {
+            phoneBook.addContact(c);
+        }
 
-        Event event = new Event(eventTitle, dateAndTime, location, contact);
-        phoneBook.addEvent(event);
+        Event event = new Event(eventTitle, dateAndTime, location, c);
+        phoneBook.scheduleEvent(event);
 
         System.out.println("Event added successfully.");
     }
 
-    private static void displayContacts() {
-        System.out.println("Contacts:");
-        phoneBook.displayContacts();
+    private static void removeContact() {
+        System.out.println("Enter contact name: ");
+        String name = scanner.nextLine();
+        phoneBook.deleteContact(name);
+        System.out.println("Contact deleted successfully.");
     }
 
-    private static void displayEvents() {
-        System.out.println("Events:");
-        phoneBook.displayEvents();
+    private static void searchContact() {
+
+        boolean e = false;
+        while (!e) {
+            System.out.println("Enter search criteria: ");
+            System.out.println(" 1. Name \n 2. Phone Number \n 3. Email Address \n 4. Address \n 5. Exit");
+            System.out.println("Enter your choice: ");
+            int choicee = scanner.nextInt();
+            switch (choicee) {
+
+                case 1:
+                    System.out.println("Enter contact name: ");
+                    String name = scanner.next();
+                    System.out.println("------------");
+                    phoneBook.findContactByName(name);
+                    System.out.println("------------");
+                    break;
+                case 2:
+                    System.out.println("Enter contact Phone number: ");
+                    String phoneNumber = scanner.next();
+                    System.out.println("------------");
+                    phoneBook.findContactByPhone(phoneNumber);
+                    System.out.println("------------");
+                    break;
+                case 3:
+                    System.out.println("Enter contact Email address: ");
+                    String email = scanner.next();
+                    System.out.println("------------");
+                    phoneBook.findContactByEmail(email);
+                    System.out.println("------------");
+                    break;
+                case 4:
+                    System.out.println("Enter contact address: ");
+                    String address = scanner.next();
+                    System.out.println("------------");
+                    phoneBook.findContactByAddress(address);
+                    System.out.println("------------");
+                    break;
+                case 5:
+                    e = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice please try again.");
+                    break;
+            }
+        }
+
     }
+    private static void printEvent(){
+        System.out.println("Enter the event name: ");
+        String eventName = scanner.next();
+        phoneBook.findEvent(eventName);
+    }
+    private static void printContactByFN(){
+        System.out.println("Enter the first name: ");
+        String firstName = scanner.next();
+        phoneBook.findContactByName(firstName);
+    }
+    private static void printAllEventsOrdered(){
+        phoneBook.printAllEventsOrdered();
+    }
+
 }

@@ -47,15 +47,19 @@ public class EventList {
 
         return events;
     }
-    public EventNode findEvent(String eventName){
+
+    public void findEvent(String eventName) {
         current = head;
-        while(current != null){
-            if(current.getEvent().getEventTitle().equalsIgnoreCase(eventName)){
-                return current;
+        while (current != null) {
+            if (current.getEvent().getEventTitle().equalsIgnoreCase(eventName)) {
+                System.out.println("Event title: " + current.getEvent().getEventTitle()
+                        + "\n Contact name: " + current.getEvent().getContact().getName()
+                        + "\n Event date and time: " + current.getEvent().getDateAndTime()
+                        + "\n Event location: " + current.getEvent().getLocation());
             }
             current = current.getNext();
         }
-        return null;
+        return;
     }
 
     private void sortEvents(Event[] events) {
