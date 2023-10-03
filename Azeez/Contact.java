@@ -77,5 +77,25 @@ public class Contact implements Comparable<Contact>{
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+	public String getType(String Type){
+		if(Type.equalsIgnoreCase("Name")){
+			return getContactName();
+		}
+		else if(Type.equalsIgnoreCase("Email")){
+			return getEmailAddress();
+		}
+		else if(Type.equalsIgnoreCase("Address")){
+			return getAddress();
+		}
+		else if(Type.equalsIgnoreCase("PhoneNumber")){
+			return getPhoneNumber();
+		}
+		else if(Type.equalsIgnoreCase("Birthday")){
+			
+			return getBirthday();
+		}
+		return null;
+		
+	}
 
 }
