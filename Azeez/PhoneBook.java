@@ -13,6 +13,7 @@ public class PhoneBook {
 	public void addContact3(Contact contact) {
 			if (contactLinkedList.empty()) {
 				contactLinkedList.insert(contact);
+				System.out.println("Allah yl3n faris alklb");
 			} else {
 				if (checkUnique(contact)) {
 					if (contactLinkedList.retrieve().compareTo(contact) <= 0) {
