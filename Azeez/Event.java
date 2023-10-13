@@ -1,46 +1,52 @@
-
 public class Event {
-	private String eventTitle;
-	private String dateAndTime;
+    private String title;
+    private Contact contact;
+    private String startTime;
+    private String endTime;
 	private String location;
-	private Contact Con;
-	
-	public Event() {
-		this.eventTitle = null;
-		this.dateAndTime = null;
-		this.location = null;
-		Con = null;
-	}
-	public Event(String eventTitle, String dateAndTime, String location, Contact con) {
-		this.eventTitle = eventTitle;
-		this.dateAndTime = dateAndTime;
+	private LinkedList<Contact> attendees;
+
+    public Event(String title, String startTime, String endTime, String location) {
+        this.title = title;
+        this.attendees = new LinkedList<>();
+        this.startTime = startTime;
+        this.endTime = endTime;
 		this.location = location;
-		Con = con;
+    }
+	public LinkedList<Contact> getAttendees() {
+		return attendees;
 	}
-	public String getEventTitle() {
-		return eventTitle;
+	public String getTitle() {
+		return title;
 	}
-	public void setEventTitle(String eventTitle) {
-		this.eventTitle = eventTitle;
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getDateAndTime() {
-		return dateAndTime;
+
+	public Contact getContact() {
+		return contact;
 	}
-	public void setDateAndTime(String dateAndTime) {
-		this.dateAndTime = dateAndTime;
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
 	}
-	public String getLocation() {
-		return location;
+
+	public String getStartTime() {
+		return startTime;
 	}
-	public void setLocation(String location) {
-		this.location = location;
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
-	public Contact getCon() {
-		return Con;
+
+	public String getEndTime() {
+		return endTime;
 	}
-	public void setCon(Contact con) {
-		Con = con;
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
-	
-	}
-	
+
+    
+}

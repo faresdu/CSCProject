@@ -5,6 +5,7 @@ public class Contact implements Comparable<Contact> {
     private String address;
     private String birthday;
     private String notes;
+    
 
     public Contact() {
         name=null;
@@ -13,6 +14,7 @@ public class Contact implements Comparable<Contact> {
         address=null;
         birthday=null;
         notes=null;
+        events = null;
     }
 
     public Contact(String name, String phoneNumber, String emailAddress, String address, String birthday,
@@ -23,6 +25,7 @@ public class Contact implements Comparable<Contact> {
         this.address = address;
         this.birthday = birthday;
         this.notes = notes;
+        events = null;
     }
 
     @Override
@@ -77,5 +80,6 @@ public class Contact implements Comparable<Contact> {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+    
 
 }
